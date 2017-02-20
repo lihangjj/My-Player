@@ -31,7 +31,6 @@ import android.widget.VideoView;
 import com.domain.Mediaitem;
 import com.domain.YinyueItem;
 import com.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.Date;
 
