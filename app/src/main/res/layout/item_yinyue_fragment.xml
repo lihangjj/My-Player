@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:id="@+id/hukongjian"
+    android:padding="3dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/yinyue_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/yinyuelogo" />
+    <LinearLayout
+        android:id="@+id/yinyuebofang"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/yinyue_name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="音乐名称"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/yinyue_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#55000000"
+            android:textSize="8sp" />
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/gengduo"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/gengduo" />
+</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/yinyuedaxiao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="20MB"
+        android:textColor="#55000000"
+        android:textSize="8sp" />
+
+    <View
+        android:id="@+id/yinyueview"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:background="#44000000" />
+
+
+
+
+
+</RelativeLayout>
