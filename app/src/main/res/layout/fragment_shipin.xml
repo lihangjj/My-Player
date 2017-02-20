@@ -1,11 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/shipin_fragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="本地视频" />
+        android:layout_height="match_parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/notv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="没有找到视频！"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/tvloading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/jiazaishipin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvloading"
+        android:layout_centerInParent="true"
+        android:text="正在加载视频文件..." />
+
+</RelativeLayout>

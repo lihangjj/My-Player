@@ -7,5 +7,24 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+<style name="gequxinxi">
+    <item name="android:textColor">@color/henhei</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:layout_height">50dp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_marginLeft">7dp</item>
+    <item name="android:layout_marginRight">7dp</item>
+    <item name="android:layout_gravity">center_horizontal</item>
+    <item name="android:gravity">center</item>
+</style>
 
+    <style name="viewxian">
+        <item name="android:background">#DCDDDD</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_height">0.4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">7dp</item>
+        <item name="android:layout_marginRight">7dp</item>
+
+    </style>
 </resources>

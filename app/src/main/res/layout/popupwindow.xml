@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#66000000">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="80dp"
+        android:background="#66000000"
+        app:cardCornerRadius="15dp">
+<ListView
+    android:layout_width="match_parent"
+    android:id="@+id/listview"
+    android:layout_height="match_parent"/>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/shoucang"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="收藏" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tianjiadao"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="添加到..." />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/nextbofang"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="接下来播放" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian"  />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/fengmian"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="获取封面歌词" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian"  />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/lingsheng"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="设为铃声" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/suixin"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="音乐随心载" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian"  />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/gequxinxi"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="歌曲信息" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/yincang"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="隐藏" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--style="@style/viewxian" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="7dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/shanchu"-->
+                    <!--style="@style/gequxinxi"-->
+                    <!--android:text="删除" />-->
+            <!--</LinearLayout>-->
+            <!--<View-->
+                <!--style="@style/viewxian"  />-->
+
+        <!--</LinearLayout>-->
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

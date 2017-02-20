@@ -1,11 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/shipin_fragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/yylistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="本地音乐" />
+         />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/noyy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="没有找到音乐！"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/yyloading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/jiazaiyinyue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/yyloading"
+        android:layout_centerInParent="true"
+        android:text="正在加载音乐文件..." />
+
+</RelativeLayout>

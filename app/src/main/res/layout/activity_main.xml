@@ -34,7 +34,7 @@
 
             <ImageView
                 android:id="@+id/shipin_image"
-                android:layout_width="30dp"
+                android:layout_width="63dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
@@ -61,14 +61,15 @@
 
             <ImageView
                 android:id="@+id/yinyue_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/tabnormal" />
+                android:layout_width="58dp"
+                android:layout_height="21.75dp"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/aodi" />
 
             <TextView
                 android:id="@+id/yinyue"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本地音乐"
@@ -84,7 +85,6 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-
             android:onClick="onclick"
             android:orientation="vertical">
 
@@ -94,7 +94,7 @@
                 android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                android:background="@drawable/tabnormal" />
+                android:background="@drawable/benchi" />
 
             <TextView
                 android:id="@+id/net_shipin"
@@ -113,7 +113,6 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-
             android:onClick="onclick"
             android:orientation="vertical">
 
@@ -123,7 +122,7 @@
                 android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                android:background="@drawable/tabnormal" />
+                android:background="@drawable/baoma" />
 
             <TextView
                 android:id="@+id/net_yinyue"

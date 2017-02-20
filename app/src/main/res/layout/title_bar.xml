@@ -8,17 +8,18 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="53dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="7dp"
         android:layout_marginTop="7dp"
-        android:src="@mipmap/hangying" />
+        android:src="@drawable/hangying"
+        android:id="@+id/imageView" />
 
     <TextView
         android:id="@+id/sousuo"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:layout_weight="1"
         android:background="@drawable/da_sousuo"
         android:clickable="true"
@@ -26,7 +27,8 @@
         android:drawablePadding="3dp"
         android:text="全网搜索"
         android:textColor="@drawable/text_color"
-        android:textSize="14sp" />
+        android:textSize="13sp" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="30dp">
