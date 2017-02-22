@@ -108,7 +108,7 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
                     sendEmptyMessageDelayed(PROGRESS, 1000);
                     break;
                 case YINCANG_KONGZHI_MIANBAN:
-                    bofangjiemian.setVisibility(View.INVISIBLE);
+                    bofangjiemian.setVisibility(View.GONE);
                     break;
             }
         }
@@ -120,7 +120,6 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         yincangTitleBar();
         setContentView(R.layout.activity_bofangshipin);
-
         findViews();
         initData();
         getData();
@@ -215,21 +214,22 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+
                 Toast.makeText(getApplicationContext(), "单机", Toast.LENGTH_SHORT).show();
                 if (bofangjiemian.getVisibility() == View.VISIBLE) {
                     bofangjiemian.setVisibility(View.INVISIBLE);
                 } else {
                     bofangjiemian.setVisibility(View.VISIBLE);
+                    handler.removeMessages(YINCANG_KONGZHI_MIANBAN);
                 }
-                jiemianZidongYincang();
                 yincangNavigationBar();
+                jiemianZidongYincang();
                 return super.onSingleTapConfirmed(e);
             }
 
             @Override
             public boolean onDoubleTap(MotionEvent e) {
                 Toast.makeText(getApplicationContext(), "双击", Toast.LENGTH_SHORT).show();
-
                 return super.onDoubleTap(e);
             }
         });
@@ -252,7 +252,39 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    public boolean onTouchEvent(MotionEvent event) {
+        gesture.onTouchEvent(event);//把事件传递给手势识别器
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startY = event.getY();
+                mVol = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                pingmugao = Math.min(screenHight, screenWidth);
+                handler.removeMessages(YINCANG_KONGZHI_MIANBAN);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                endY = event.getY();
+                distanceY = endY - startY;
+                gaibianVol = (int) (2 * distanceY * maxvoice / pingmugao);
+                if (event.getX() > screenWidth * 0.5) {
+                    if (Math.abs(distanceY) > 50) {
+                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mVol - gaibianVol, 0);
+                        yinliang.setProgress(mVol - gaibianVol);
+                        if (mVol - gaibianVol <= 0) {
+                            shengyin.setImageResource(R.drawable.jingyin);
+                        } else {
+                            shengyin.setImageResource(R.drawable.shengyin);
+                        }
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
 
+                break;
+
+        }
+        jiemianZidongYincang();
+        return super.onTouchEvent(event);
+    }
     public void setBattery(int dian) {
         if (dian <= 10) {
             dianliang.setImageResource(R.drawable.dianliang0);
@@ -508,39 +540,7 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
     private float endY;
     private float distanceY;
 
-    public boolean onTouchEvent(MotionEvent event) {
-        gesture.onTouchEvent(event);//把事件传递给手势识别器
-        bofangjiemian.setVisibility(View.VISIBLE);
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startY = event.getY();
-                mVol = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-                pingmugao = Math.min(screenHight, screenWidth);
 
-                break;
-            case MotionEvent.ACTION_MOVE:
-                endY = event.getY();
-                distanceY = endY - startY;
-                gaibianVol = (int) (2 * distanceY * maxvoice / pingmugao);
-                if (event.getX() > screenWidth * 0.5) {
-                    if (Math.abs(distanceY) > 50) {
-                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mVol - gaibianVol, 0);
-                        yinliang.setProgress(mVol - gaibianVol);
-                        if (mVol - gaibianVol <= 0) {
-                            shengyin.setImageResource(R.drawable.jingyin);
-                        } else {
-                            shengyin.setImageResource(R.drawable.shengyin);
-                        }
-                    }
-
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-        }
-        jiemianZidongYincang();
-        return super.onTouchEvent(event);
-    }
 
     @Override//监听物理键关联
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -589,6 +589,7 @@ public class BofangshipinActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onDestroy() {
+        handler.removeCallbacksAndMessages(null);
         if (recevier != null) {
             unregisterReceiver(recevier);
 
