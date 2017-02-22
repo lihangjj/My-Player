@@ -100,7 +100,7 @@
                 android:id="@+id/net_shipin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="联网视频"
+                android:text="联网音乐"
                 android:textColor="@android:color/background_dark"
                 android:textSize="10sp" />
 
@@ -128,7 +128,7 @@
                 android:id="@+id/net_yinyue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="联网音乐"
+                android:text="联网视频"
                 android:textColor="@android:color/background_dark"
                 android:textSize="10sp" />
 
