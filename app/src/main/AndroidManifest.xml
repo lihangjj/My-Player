@@ -39,6 +39,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".YybofangActivity"
+            android:label="@string/yinyueplay_name"
+            android:launchMode="singleTask"
+            android:configChanges="keyboardHidden|screenSize|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="audio/*"/>
+            </intent-filter>
+        </activity>
+        <service android:name="com.service.MusicService">
+            <intent-filter>
+                <action android:name="com.lihang.OPENAUDIO"/>
+            </intent-filter>
+        </service>
 
     </application>
 

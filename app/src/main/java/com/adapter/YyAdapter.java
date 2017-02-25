@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cexample.myplayer.BofangshipinActivity;
 import com.cexample.myplayer.MyApplication;
 import com.cexample.myplayer.R;
+import com.cexample.myplayer.YybofangActivity;
 import com.domain.YinyueItem;
 import com.utils.Utils;
 
@@ -44,11 +45,9 @@ public class YyAdapter extends RecyclerView.Adapter<YyAdapter.ViewHolder> {
 
                 YinyueItem yinyueItem=myinyueItems.get(holder.getAdapterPosition());
                 Toast.makeText(v.getContext(), "播放" + yinyueItem.getName(), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(MyApplication.getContext(),BofangshipinActivity.class);
+                Intent intent=new Intent(MyApplication.getContext(),YybofangActivity.class);
                 intent.putParcelableArrayListExtra("myinyueItems", (ArrayList<? extends Parcelable>) myinyueItems);
                 intent.putExtra("yinyueposition",holder.getAdapterPosition());
-//                Intent intent=new Intent(Intent.ACTION_VIEW);
-//                intent.setDataAndType(Uri.parse(yinyueItem.getData()),"audio/*");
                 MyApplication.getContext().startActivity(intent);
 //                mediaPlayer.reset();
 //                try {

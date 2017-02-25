@@ -36,7 +36,7 @@ import java.util.Map;
  * Created by Administrator on 2017/1/16.
  */
 
-public class ShipinFragment extends Fragment {
+public class ShipinFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback {
     private RecyclerView spRecyclerview;
     private TextView notv;
     private ProgressBar tvloading;
@@ -54,11 +54,7 @@ public class ShipinFragment extends Fragment {
         notv = (TextView) view.findViewById(R.id.notv);
         tvloading = (ProgressBar) view.findViewById(R.id.tvloading);
         jiazaishipin = (TextView) view.findViewById(R.id.jiazaishipin);
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        } else {
-            getDatafromlocal();
-        }
+        getDatafromlocal();
         return view;
     }
 
@@ -79,6 +75,7 @@ public class ShipinFragment extends Fragment {
                 notv.setVisibility(View.VISIBLE);
             }
             //Progressbar隐藏
+            jiazaishipin.setVisibility(View.GONE);
             tvloading.setVisibility(View.GONE);
         }
     };
@@ -86,7 +83,7 @@ public class ShipinFragment extends Fragment {
     //1，遍历后缀名获取（太慢），2.从内容提供者中获取3.如果是6.0需要动态权限
     private void getDatafromlocal() {
         mediaitems = new ArrayList<>();
-        map =new HashMap<Long, Bitmap>();
+        map =new HashMap<>();
         new Thread() {
             public void run() {
                 ContentResolver contenResolver = getActivity().getContentResolver();
@@ -110,7 +107,6 @@ public class ShipinFragment extends Fragment {
                         sp.setId(cusor.getLong(4));
                         map.put(cusor.getLong(4),bitmap);
                         mediaitems.add(sp);
-                        handler.sendEmptyMessage(10);
                     } while (cusor.moveToNext());
                     cusor.close();
                 }
@@ -119,26 +115,8 @@ public class ShipinFragment extends Fragment {
                  * handler就去执行，再回到线程加载剩余数据时，handler已经不发送消息，
                  * 因此发送消息handler应该写在线程里边，加载一点数据，就去更新一段UI
                  *
-                 */
+                 */handler.sendEmptyMessage(10);
             }
         }.start();
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0) {
-                    for (int result : grantResults) {
-                        if (result != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(getActivity(), "你必须同意权限才能使用本程序", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    getDatafromlocal();
-                }
-                break;
-            default:
-        }
-    }
-
 }

@@ -1,11 +1,37 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/shipin_fragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/xialashuaxin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="联网视频" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/net_video_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/net_video_progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/net_video_text"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/net_video_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="网络视频加载中..." />
+
+    </RelativeLayout>
+
 
 </FrameLayout>

@@ -8,9 +8,13 @@ public class Mediaitem implements Parcelable {
     private long duration;
     private long size;
     private long id;
+    private String videoLength;
     private String data;
+    private String imageUrl;
+    private String shipinshuoming;
 
     public Mediaitem() {
+
     }
 
     protected Mediaitem(Parcel in) {
@@ -18,7 +22,10 @@ public class Mediaitem implements Parcelable {
         duration = in.readLong();
         size = in.readLong();
         id = in.readLong();
+        videoLength = in.readString();
         data = in.readString();
+        imageUrl = in.readString();
+        shipinshuoming = in.readString();
     }
 
     public static final Creator<Mediaitem> CREATOR = new Creator<Mediaitem>() {
@@ -65,12 +72,36 @@ public class Mediaitem implements Parcelable {
         this.id = id;
     }
 
+    public String getVideoLength() {
+        return videoLength;
+    }
+
+    public void setVideoLength(String videoLength) {
+        this.videoLength = videoLength;
+    }
+
     public String getData() {
         return data;
     }
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getShipinshuoming() {
+        return shipinshuoming;
+    }
+
+    public void setShipinshuoming(String shipinshuoming) {
+        this.shipinshuoming = shipinshuoming;
     }
 
     @Override
@@ -84,6 +115,9 @@ public class Mediaitem implements Parcelable {
         dest.writeLong(duration);
         dest.writeLong(size);
         dest.writeLong(id);
+        dest.writeString(videoLength);
         dest.writeString(data);
+        dest.writeString(imageUrl);
+        dest.writeString(shipinshuoming);
     }
 }

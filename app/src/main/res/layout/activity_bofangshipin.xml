@@ -204,7 +204,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/bofangzu"
                 android:text="03:26"
-                android:textColor="#FFFFFF"
                 android:textSize="10sp" />
 
 

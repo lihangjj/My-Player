@@ -2,8 +2,6 @@ package com.adapter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +21,6 @@ import com.cexample.myplayer.R;
 import com.domain.Mediaitem;
 import com.utils.Utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,12 +49,9 @@ public class SpAdapter extends RecyclerView.Adapter<SpAdapter.ViewHolder> {
                 Mediaitem mediaItem = mshipinItems.get(holder.getAdapterPosition());
                 Toast.makeText(MyApplication.getContext(), "播放" + mediaItem.getName(), Toast.LENGTH_SHORT).show();
                 //传递列表数据，对象需要序列化
-
-
                 Intent intent = new Intent(MyApplication.getContext(), BofangshipinActivity.class);
-                intent.setData(Uri.parse("http://192.168.0.102:8080/dajian.mp4"));
                 intent.putExtra("shipinposition", holder.getAdapterPosition());
-//                intent.putParcelableArrayListExtra("mediaItems", (ArrayList<? extends Parcelable>) mshipinItems);
+                intent.putParcelableArrayListExtra("mediaItems", (ArrayList<? extends Parcelable>) mshipinItems);
                 MyApplication.getContext().startActivity(intent);
             }
         });

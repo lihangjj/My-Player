@@ -1,27 +1,31 @@
 package com.cexample.myplayer;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fragments.NetShipinFragment;
 import com.fragments.NetYinyueFragment;
 import com.fragments.ShipinFragment;
 import com.fragments.YinyueFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private ImageView shipinImage;
     private ImageView yinyueImage;
     private ImageView netshipinImage;
@@ -42,10 +46,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        shuaxinMediaSrore();
-        Log.d("abcdefg", "onCreate: +++++++++++6++++++++++++++++++++++++++++++++");
-        chushiFragment();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        } else {
+            initView();
+            shuaxinMediaSrore();
+            chushiFragment();
+        }
+        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -149,5 +157,21 @@ public class MainActivity extends AppCompatActivity {
         netshipinImage.setImageDrawable(null);
         netyinyue.setTextColor(Color.DKGRAY);
         netyinyueImage.setImageDrawable(null);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0&&grantResults[0]==PackageManager.PERMISSION_GRANTED) {
+                    initView();
+                    shuaxinMediaSrore();
+                    chushiFragment();
+                }else{
+                    Toast.makeText(this, "你必须同意权限才能使用本程序", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+            default:
+        }
     }
 }

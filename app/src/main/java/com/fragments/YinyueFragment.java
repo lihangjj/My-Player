@@ -1,19 +1,14 @@
 package com.fragments;
 
-import android.Manifest;
 import android.app.Fragment;
 import android.content.ContentResolver;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,16 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adapter.YyAdapter;
 import com.cexample.myplayer.R;
 import com.domain.YinyueItem;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/16.
@@ -55,12 +46,7 @@ public class YinyueFragment extends Fragment {
         noyy = (TextView) view.findViewById(R.id.noyy);
         yyloading = (ProgressBar) view.findViewById(R.id.yyloading);
         jiazaiyinyue = (TextView) view.findViewById(R.id.jiazaiyinyue);
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        } else {
-            getDatafromlocal();
-        }
-
+        getDatafromlocal();
         return view;
     }
 
@@ -83,6 +69,7 @@ public class YinyueFragment extends Fragment {
                 noyy.setVisibility(View.VISIBLE);
             }
             //Progressbar隐藏
+            jiazaiyinyue.setVisibility(View.GONE);
             yyloading.setVisibility(View.GONE);
         }
     };
@@ -99,6 +86,7 @@ public class YinyueFragment extends Fragment {
                         MediaStore.Audio.Media.SIZE,
                         MediaStore.Audio.Media.TITLE,
                         MediaStore.Audio.Media.DATA,
+                        MediaStore.Audio.Media.ARTIST,
                 };
                 Cursor cursor = contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Prjs, null, null, null);
                 if (cursor.moveToFirst()) {
@@ -108,63 +96,16 @@ public class YinyueFragment extends Fragment {
                         yy.setName(cursor.getString(2));
                         yy.setSize(cursor.getLong(1));
                         yy.setDuration(cursor.getLong(0));
+                        yy.setArtist(cursor.getString(4));
                         yinyueItems.add(yy);
-                        handler.sendEmptyMessage(119);
                     } while (cursor.moveToNext());
                 }
+                cursor.close();
 //                MusicUtils.getMusicFile(yinyueItems, Environment.getExternalStorageDirectory());
                 //发消息
+                handler.sendEmptyMessage(119);
             }
         }.start();
-    }
-
-    public static class MusicUtils {
-
-        /**
-         * 获取指定路径中的视频文件
-         *
-         * @param list 装扫描出来的视频文件实体类
-         * @param file 指定的文件
-         */
-        public static void getMusicFile(final List<YinyueItem> list, File file) {// 获得音乐文件
-            file.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
-                    // sdCard找到音乐名称
-                    String name = file.getName();
-                    int i = name.indexOf('.');
-                    if (i != -1) {
-                        name = name.substring(i);//获取文件后缀名
-                        if (name.equalsIgnoreCase(".mp3")  //忽略大小写
-                                || name.equalsIgnoreCase(".3gp")
-                                || name.equalsIgnoreCase(".xvid")) {
-                            YinyueItem vi = new YinyueItem();
-                            vi.setName(file.getName());//文件名
-                            vi.setData(file.getAbsolutePath()); //文件路径
-                            vi.setSize(file.length());
-                            list.add(vi);
-                            return true;
-                        }
-                    } else if (file.isDirectory()) {
-                        getMusicFile(list, file);
-                    }
-                    return false;
-                }
-            });
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getDatafromlocal();
-                } else {
-                    Toast.makeText(getActivity(), "拒绝权限则失败", Toast.LENGTH_LONG).show();
-                }
-        }
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.adapter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
@@ -21,11 +20,15 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cexample.myplayer.BofangshipinActivity;
 import com.cexample.myplayer.MyApplication;
 import com.cexample.myplayer.R;
-import com.gson.MovieInfo;
+import com.domain.Mediaitem;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,11 +37,11 @@ import java.util.List;
  */
 
 public class NetSpAdapter extends RecyclerView.Adapter<NetSpAdapter.ViewHolder> {
-    public NetSpAdapter(List<MovieInfo> mediaitems) {
+    public NetSpAdapter(List<Mediaitem> mediaitems) {
         mshipinItems = mediaitems;
     }
 
-    private List<MovieInfo> mshipinItems;
+    private List<Mediaitem> mshipinItems;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,13 +50,13 @@ public class NetSpAdapter extends RecyclerView.Adapter<NetSpAdapter.ViewHolder> 
         holder.shipinbofang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MovieInfo movieInfo = mshipinItems.get(holder.getAdapterPosition());
-                Toast.makeText(MyApplication.getContext(), "播放" + movieInfo.getMovieName(), Toast.LENGTH_SHORT).show();
+                Mediaitem movieInfo = mshipinItems.get(holder.getAdapterPosition());
+                Toast.makeText(MyApplication.getContext(), "播放" + movieInfo.getName(), Toast.LENGTH_SHORT).show();
                 //传递列表数据，对象需要序列化
                 Intent intent = new Intent(MyApplication.getContext(), BofangshipinActivity.class);
-                intent.setData(Uri.parse(movieInfo.getMovieUrl()));
+                intent.setData(Uri.parse(movieInfo.getData()));
                 intent.putExtra("shipinposition", holder.getAdapterPosition());
-//                intent.putParcelableArrayListExtra("mediaItems", (ArrayList<? extends Parcelable>) mshipinItems);
+                intent.putParcelableArrayListExtra("mediaItems", (ArrayList<? extends Parcelable>) mshipinItems);
                 MyApplication.getContext().startActivity(intent);
             }
         });
@@ -97,14 +100,41 @@ public class NetSpAdapter extends RecyclerView.Adapter<NetSpAdapter.ViewHolder> 
     }
 
     /**
-     * 第一步创建RequestQueue对象
+     * 1.第一步创建RequestQueue对象
      */
     private RequestQueue mQueue = Volley.newRequestQueue(MyApplication.getContext());
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final MovieInfo movieInfo = mshipinItems.get(position);
+        final Mediaitem movieInfo = mshipinItems.get(position);
 //        RequestQueue mQueue= Volley.newRequestQueue(MyApplication.getContext());//放在这里边会导致内存溢出，因为不停创建RequestQueue
+        /**
+         * 使用ImageLoader加载图片
+         */
+        ImageLoaderByImageLoader(holder, movieInfo);
+
+        /**
+         * 使用glide加载图片，实践证明没有VOLLEY快
+         */
+//        Glide.with(MyApplication.getContext()).load(movieInfo.getImageUrl())
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)//全尺寸缓存
+//                .placeholder(R.drawable.xiaoshipin)//加载过程中的图片
+//                .error(null)//加载出错的图片
+//                .into(holder.shipin_icon);
+        /**
+         * 使用picasso加载图片,一般用glide
+         */
+//        Picasso.with(MyApplication.getContext()).load(movieInfo.getImageUrl())
+////                .diskCacheStrategy(DiskCacheStrategy.ALL)//全尺寸缓存
+//        .placeholder(R.drawable.xiaoshipin)//加载过程中的图片
+////                .error(null)//加载出错的图片
+//                .into(holder.shipin_icon);
+        holder.shipin_name.setText(movieInfo.getName());
+        holder.shipin_time.setText(movieInfo.getShipinshuoming());
+        holder.shipin_daxiao.setText(movieInfo.getVideoLength() + "分钟");
+    }
+
+    private void ImageLoaderByImageLoader(ViewHolder holder, Mediaitem movieInfo) {
         /**
          * 2.创建ImageLoader对象,两个参数，一为请求队列对象，二为实现ImageLoader.ImageCache接口的类，
          */
@@ -114,13 +144,9 @@ public class NetSpAdapter extends RecyclerView.Adapter<NetSpAdapter.ViewHolder> 
          */
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(holder.shipin_icon, 0, 0);
         /**
-         * 最后imageLoader.get(movieInfo.getImageurl(), listener);
+         * 4.最后imageLoader.get(movieInfo.getImageurl(), listener);
          */
-        imageLoader.get(movieInfo.getImageurl(), listener);
-
-        holder.shipin_name.setText(movieInfo.getMovieName());
-        holder.shipin_time.setText(movieInfo.getMovieshuoming());
-        holder.shipin_daxiao.setText(movieInfo.getVideoLength() + "分钟");
+        imageLoader.get(movieInfo.getImageUrl(), listener);
     }
 
     @Override
